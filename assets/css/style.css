@@ -1,0 +1,38 @@
+#app {
+    min-height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#app::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0);
+    z-index: 1 !important;
+}
+
+* {
+    position: relative;
+    z-index: 2;
+}
+
+.current-weather-icon {
+    font-size: 10rem !important;
+}
+
+.text-sm {
+    font-size: .9rem !important;
+}
+
+.daily {
+
+}
+
+a {
+    cursor: pointer;
+}
