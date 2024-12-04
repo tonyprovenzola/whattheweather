@@ -51,7 +51,7 @@ var app = new Vue({
         }
       },
       background: {
-        options: ['/assets/img/lightning.jpg'],
+        options: ['lightning.jpg'],
         selected: 0
       },
       loading: true

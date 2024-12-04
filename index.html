@@ -13,7 +13,7 @@
 </head>
 <body>
   
-  <div id="app" class="pt-5" :style="'background-image:url('+background.options[background.selected]+');'">
+  <div id="app" class="pt-5" :style="'background-image:url(./assets/img/'+background.options[background.selected]+');'">
     <div v-if="!loading" class="container">
       <div class="row min-vh-100 align-items-center" v-if="!userLocation.set">
         <div class="col-6 mx-auto" v-if="!userLocation.granted">
