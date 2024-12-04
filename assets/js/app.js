@@ -57,6 +57,9 @@ var app = new Vue({
       loading: true
     },
     created() {
+      if('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js');	
+      }
       this.loadLocation();
     },
     methods: {

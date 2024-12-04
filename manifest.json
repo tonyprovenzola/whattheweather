@@ -1,0 +1,36 @@
+{
+    "theme_color": "#000000",
+    "background_color": "#000000",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/index.html",
+	"name": "Just the Weather",
+    "app_name": "Just the Weather",
+    "short_name": "Just the Weather",
+    "description": "Simple Weather web app",
+	"version": "1.0.0",
+    "icons": [
+		{
+            "src": "/assets/img/icons/android-launchericon-128-128.png",
+            "sizes": "128x128",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/img/icons/android-launchericon-144-144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/img/icons/android-launchericon-256-256.png",
+            "sizes": "256x256",
+            "type": "image/PNG",
+			"purpose": "any maskable"
+        },
+        {
+            "src": "/assets/img/icons/android-launchericon-512-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+  	"splash_pages": null
+}
