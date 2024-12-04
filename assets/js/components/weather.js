@@ -102,7 +102,7 @@ Vue.component('weather',{
             return month+'/'+day;
         }
     },
-    template: `<section class="min-vh-100 container-fluid">
+    template: `<section class="min-vh-100 container-fluid my-5">
         <div class="container align-items-center" v-if="!loading">
             <!-- interface displaying current weather conditions -->
             <div class="container align-items-center" style="padding-top:10%;">
@@ -119,8 +119,8 @@ Vue.component('weather',{
                 </div>
                 <!-- forecast -->
                 <p class="font-weight-bold">{{api.endpoints.forecast.params.forecast_days}} Day Forecast</p>
-                <div class="mb-5 row row-cols-6 g-3">
-                    <div class="col" v-for="(w,index) in currentLocation.weather.daily.time">
+                <div class="mb-5 row">
+                    <div class="col-md-3" v-for="(w,index) in currentLocation.weather.daily.time">
                         <div class="daily p-2 border rounded shadow-sm m-1 bg-white">
                             <div>
                                 <p class="font-weight-bold">
