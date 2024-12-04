@@ -1,4 +1,4 @@
-#app {
+#app,body {
     min-height: 100vh;
     background-attachment: fixed;
     background-size: cover;
@@ -7,7 +7,6 @@
 }
 
 #app::before {
-    content: '';
     position: fixed;
     top: 0;
     left: 0;
@@ -30,12 +29,44 @@
     font-size: .9rem !important;
 }
 
-.daily {
-
+.forecast {
+    display: flex;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    scroll-snap-type: x mandatory; /* Enable snapping horizontally */
+    gap: 10px; /* Optional spacing between items */
 }
 
-a {
+.forecast::-webkit-scrollbar {
+    height: 4px; /* Horizontal scrollbar thickness */
+    border-radius: 10px;
+}
+
+.forecast::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Light background for the scrollbar track */
+    border-radius: 10px;
+}
+
+.forecast::-webkit-scrollbar-thumb {
+    background: #0ec41e; /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Rounded corners for the thumb */
+}
+
+.forecast::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Darker color for the thumb when hovered */
+}
+
+.daily {
+    flex: 0 0 calc(100% / 7); /* Each item is one-seventh the width of the container */
+    scroll-snap-align: start; /* Align items to the start when snapping */
+}
+
+a,.pointer {
     cursor: pointer;
+}
+
+.hover:hover {
+color:#ffffff !important;
+background-color: #0ec41e !important;
 }
 
 .btn-outline:hover {
@@ -47,3 +78,10 @@ a {
 .font-weight-bold {
     font-weight: bold;
 }
+
+@media (max-width: 800px) {
+    .daily {
+      flex: 0 0 calc(100% / 3); /* Each item is one-third the width of the container */
+    }
+  }
+  

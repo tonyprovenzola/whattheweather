@@ -12,7 +12,7 @@ var app = new Vue({
             url: 'https://geocoding-api.open-meteo.com/v1/search/',
             params: {
               name: '',
-              count: 1,
+              count: 10,
               language: 'en',
               format: 'json'
             }
@@ -39,6 +39,10 @@ var app = new Vue({
         errorMessage: ''
       },
       userLocation: {
+        search: {
+          terms: '',
+          results: []
+        },
         granted: false,
         set: false,
         zip: null,
@@ -51,7 +55,7 @@ var app = new Vue({
         }
       },
       background: {
-        options: ['lightning.jpg'],
+        options: ['./assets/img/lightning.jpg'],
         selected: 0
       },
       loading: true
@@ -60,6 +64,7 @@ var app = new Vue({
       if('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./sw.js');	
       }
+      document.querySelector('body').style.backgroundImage = 'url('+this.background.options[this.background.selected]+')';
       this.loadLocation();
     },
     methods: {
@@ -68,6 +73,38 @@ var app = new Vue({
           this.userLocation.zip = data.postal;
           this.setLocationFromZip();
         });
+      },
+      searchLocations() {
+
+        this.api.endpoints.geo.params.name = this.userLocation.search.terms;
+
+        var params = '';
+
+        for (const [key, value] of Object.entries(this.api.endpoints.geo.params)) {
+            params += key+'='+value+'&';
+        }
+
+        fetch(this.api.endpoints.geo.url+'?'+params).then(response => response.json()).then(data=>{
+
+          if(data.results.length < 1) {
+            alert('no location found');return;
+          } else {
+            this.userLocation.search.results = data.results;
+          }
+
+        });
+
+
+      },
+      chooseLocation(zips) {
+        
+        this.userLocation.zip = zips[0];
+        this.userLocation.search = {
+          terms: '',
+          results:[]
+        };
+        this.setLocationFromZip();
+
       },
       setLocationFromZip() {
 

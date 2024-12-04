@@ -2,6 +2,7 @@ Vue.component('weather',{
     data() {
         return {
             loading: true,
+            updateInterval: 10000,
             currentLocation: {
                 city: '',
                 state: '',
@@ -21,6 +22,11 @@ Vue.component('weather',{
     mounted() {
         if(this.userLocation.set) {
             this.getWeather();
+            
+            setInterval(() => {
+                this.getWeather();
+            }, this.updateInterval);
+            
         } else {
             this.loading = false;
         }
@@ -68,6 +74,11 @@ Vue.component('weather',{
 
         },
         getWeather() {
+
+            if(!this.userLocation.set) {
+                return;
+            }
+
             this.api.endpoints.forecast.params.latitude = this.userLocation.coords.latitude;
             this.api.endpoints.forecast.params.longitude = this.userLocation.coords.longitude;
             this.api.endpoints.forecast.params.timezone = this.userLocation.timezone;
@@ -119,9 +130,9 @@ Vue.component('weather',{
                 </div>
                 <!-- forecast -->
                 <p class="font-weight-bold badge bg-white text-dark">{{api.endpoints.forecast.params.forecast_days}} Day Forecast</p>
-                <div class="mb-5 row">
-                    <div class="col-md-3" v-for="(w,index) in currentLocation.weather.daily.time">
-                        <div class="daily p-2 border rounded shadow-sm m-1 bg-white">
+                <div class="mb-5 py-4 forecast">
+                    <div class="daily" v-for="(w,index) in currentLocation.weather.daily.time">
+                        <div class="p-2 h-100 border rounded shadow-sm m-1 bg-white">
                             <div>
                                 <p>
                                     <span class="material-symbols-outlined float-end">{{ setWeatherIcon(currentLocation.weather.daily.weather_code[index]).icon }}</span>

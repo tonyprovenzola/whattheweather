@@ -14,7 +14,7 @@
 </head>
 <body>
   
-  <div id="app" class="pt-2" :style="'background-image:url(./assets/img/'+background.options[background.selected]+');'">
+  <div id="app" class="pt-2">
     <div v-if="!loading" class="container">
       <div class="row" v-if="!userLocation.set">
         <div class="col-12 mb-3" v-if="!userLocation.granted" style="margin-top:5%;">
@@ -30,13 +30,29 @@
                 <a class="btn btn-outline border-dark bg-white" @click="getUserLocation">Use Location</a>
               </div>
             
-              <form class="col-6 text-center" @submit.prevent="setLocationFromZip">
+              <div class="col-6 text-start">
+                
+                <form class="d-none" @submit.prevent="setLocationFromZip">
+                    <div class="form-group">
+                        <label class="mb-3 d-block">Or by ZIP code</label>
+                        <input class="form-control d-inline-block w-50 m-0 mr-2" v-model="userLocation.zip">
+                        <input type="submit" class="m-0 d-inline-block btn-outline btn bg-white text-dark border-dark" value="Go">
+                    </div>
+                </form>
+
+                <form @submit.prevent="searchLocations">
                   <div class="form-group">
-                      <label class="mb-3 d-block">Or by ZIP code</label>
-                      <input class="form-control d-inline-block w-50 m-0 mr-2" v-model="userLocation.zip">
+                      <label class="mb-3 d-block">Or search by location</label>
+                      <input class="form-control d-inline-block w-50 m-0 mr-2" @input="userLocation.search.results = []" v-model="userLocation.search.terms">
                       <input type="submit" class="m-0 d-inline-block btn-outline btn bg-white text-dark border-dark" value="Go">
                   </div>
-              </form>
+                </form>
+                <div class="p-2 border rounded shadow" v-if="userLocation.search.results.length > 0">
+                  <div class="pointer hover rounded p-2 bg-white border-bottom" v-if="l.postcodes != null && l.postcodes.length > 0" v-for="(l,index) in userLocation.search.results">
+                    <a @click="chooseLocation(l.postcodes)">{{ l.name }}, {{l.admin1}}</a>
+                  </div>
+                </div>
+              </div>
 
             </div>
         </div>
