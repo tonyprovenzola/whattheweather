@@ -13,22 +13,31 @@
 </head>
 <body>
   
-  <div id="app" class="pt-5" :style="'background-image:url(./assets/img/'+background.options[background.selected]+');'">
+  <div id="app" class="pt-2" :style="'background-image:url(./assets/img/'+background.options[background.selected]+');'">
     <div v-if="!loading" class="container">
-      <div class="row min-vh-100 align-items-center" v-if="!userLocation.set">
-        <div class="col-6 mx-auto" v-if="!userLocation.granted">
-            <div class="p-3 h-100 rounded border bg-white shadow">
+      <div class="row" v-if="!userLocation.set">
+        <div class="col-12 mb-3" v-if="!userLocation.granted" style="margin-top:5%;">
+
+            <div class="row justify-content-center p-3 pb-5 h-100 rounded border bg-white shadow">
+
+              <div class="col-12 mb-3 text-center">
+                <img style="width: 200px;" src="./assets/img/icons/android-launchericon-512-512.png">
+              </div>
+                
+              <div class="col-6 text-center">
                 <p>Use current location</p>
                 <a class="btn btn-outline border-dark bg-white" @click="getUserLocation">Use Location</a>
+              </div>
+            
+              <form class="col-6 text-center" @submit.prevent="setLocationFromZip">
+                  <div class="form-group">
+                      <label class="mb-3 d-block">Or by ZIP code</label>
+                      <input class="form-control d-inline-block w-50 m-0 mr-2" v-model="userLocation.zip">
+                      <input type="submit" class="m-0 d-inline-block btn-outline btn bg-white text-dark border-dark" value="Go">
+                  </div>
+              </form>
+
             </div>
-        </div>
-        <div class="col-6 mx-auto">
-            <form class="p-3 h-100 rounded border bg-white shadow" @submit.prevent="setLocationFromZip">
-                <div class="form-group">
-                    <label>Or by ZIP code</label>
-                    <input v-model="userLocation.zip">
-                </div>
-            </form>
         </div>
       </div>
       <div v-else>

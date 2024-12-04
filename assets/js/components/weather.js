@@ -102,10 +102,10 @@ Vue.component('weather',{
             return month+'/'+day;
         }
     },
-    template: `<section class="min-vh-100 container-fluid my-5">
+    template: `<section class="min-vh-100 container-fluid">
         <div class="container align-items-center" v-if="!loading">
             <!-- interface displaying current weather conditions -->
-            <div class="container align-items-center" style="padding-top:10%;">
+            <div class="container align-items-center" style="padding-top:5%;">
                 <!-- current weather display -->
                 <div class="align-items-center mb-4">
                     <div class="text-center mx-auto p-3 rounded border shadow bg-white">
@@ -118,14 +118,14 @@ Vue.component('weather',{
                     </div>
                 </div>
                 <!-- forecast -->
-                <p class="font-weight-bold">{{api.endpoints.forecast.params.forecast_days}} Day Forecast</p>
+                <p class="font-weight-bold badge bg-white text-dark">{{api.endpoints.forecast.params.forecast_days}} Day Forecast</p>
                 <div class="mb-5 row">
                     <div class="col-md-3" v-for="(w,index) in currentLocation.weather.daily.time">
                         <div class="daily p-2 border rounded shadow-sm m-1 bg-white">
                             <div>
-                                <p class="font-weight-bold">
+                                <p>
                                     <span class="material-symbols-outlined float-end">{{ setWeatherIcon(currentLocation.weather.daily.weather_code[index]).icon }}</span>
-                                    <span>{{ w | shortDate}}</span>
+                                    <span class="font-weight-bold">{{ w | shortDate}}</span>
                                 </p>
                             </div>
                             <p>{{setWeatherIcon(currentLocation.weather.daily.weather_code[index]).description}}</p>

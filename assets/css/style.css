@@ -37,3 +37,13 @@
 a {
     cursor: pointer;
 }
+
+.btn-outline:hover {
+    background-color: #c9c9c9 !important;
+    transition: .15s ease-in-out;
+    transform: scale(1.10);
+}
+
+.font-weight-bold {
+    font-weight: bold;
+}
