@@ -25,20 +25,12 @@
                 <img style="width: 200px;" src="./assets/img/icons/android-launchericon-512-512.png">
               </div>
                 
-              <div class="col-6 text-center">
+              <div class="col-md-6 mb-3 text-center">
                 <p>Use current location</p>
                 <a class="btn btn-outline border-dark bg-white" @click="getUserLocation">Use Location</a>
               </div>
             
-              <div class="col-6 text-start">
-                
-                <form class="d-none" @submit.prevent="setLocationFromZip">
-                    <div class="form-group">
-                        <label class="mb-3 d-block">Or by ZIP code</label>
-                        <input class="form-control d-inline-block w-50 m-0 mr-2" v-model="userLocation.zip">
-                        <input type="submit" class="m-0 d-inline-block btn-outline btn bg-white text-dark border-dark" value="Go">
-                    </div>
-                </form>
+              <div class="col-md-6 text-start">
 
                 <form @submit.prevent="searchLocations">
                   <div class="form-group">

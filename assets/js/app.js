@@ -97,7 +97,7 @@ var app = new Vue({
 
       },
       chooseLocation(zips) {
-        
+
         this.userLocation.zip = zips[0];
         this.userLocation.search = {
           terms: '',

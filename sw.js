@@ -59,4 +59,4 @@ self.addEventListener('fetch',function(e) {
 	
 });
 
-//self.addEventListener('push', function(e) {});
+self.addEventListener('push', function(e) {});
