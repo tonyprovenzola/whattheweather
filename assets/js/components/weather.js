@@ -123,7 +123,7 @@ Vue.component('weather',{
                         <a style="z-index:10;" @click="userLocation.set = false;" class="badge text-dark float-end m-2 bg-light">
                             <span class="material-symbols-outlined">edit</span>
                         </a>
-                        <h1 style="clear:both;" class="text-start">Current weather in {{ userLocation.city }}, {{ userLocation.state }}</h1>
+                        <p class="text-start">Currently in {{ userLocation.city }}, {{ userLocation.state }}</p>
                         <span class="material-symbols-outlined current-weather-icon">{{ currentLocation.weather.summary.icon }}</span>
                         <p>{{ currentLocation.weather.summary.description }}, {{currentLocation.weather.current.temperature_2m | roundUp}}&deg; F</p>
                     </div>

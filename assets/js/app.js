@@ -70,38 +70,8 @@ var app = new Vue({
       }
       document.querySelector('body').style.backgroundImage = 'url('+this.background.options[this.background.selected]+')';
       this.loadLocation();
-
-      if (window.navigator.standalone) {
-        return true;
-      }
-      // For other platforms
-      if (window.matchMedia('(display-mode: standalone)').matches) {
-        return true;
-      }
-      
-      this.appInstallation();
     },
     methods: {
-      appInstallation() {
-          window.addEventListener('beforeinstallprompt', (e) => {
-            // Prevent the mini-infobar from appearing
-            e.preventDefault();
-            // Store the event for later use
-            this.pwa.deferredPrompt = e;
-          });
-      },
-      promptAppInstall() {
-          this.pwa.deferredPrompt.prompt();
-          // Wait for the user to respond to the prompt
-          this.pwa.deferredPrompt.userChoice.then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') {
-              console.log('User accepted the install prompt');
-            } else {
-              console.log('User dismissed the install prompt');
-            }
-            this.pwa.deferredPrompt = null;
-          });
-      },
       getUserLocation() {
         fetch(this.api.endpoints.geoDB.url).then(response => response.json()).then(data=>{
           this.userLocation.zip = data.postal;
