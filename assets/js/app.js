@@ -58,10 +58,7 @@ var app = new Vue({
         options: ['./assets/img/lightning.jpg'],
         selected: 0
       },
-      pwa: {
-        installed: false,
-        deferredPrompt: null
-      },
+      recents: [],
       loading: true
     },
     created() {
@@ -70,6 +67,9 @@ var app = new Vue({
       }
       document.querySelector('body').style.backgroundImage = 'url('+this.background.options[this.background.selected]+')';
       this.loadLocation();
+      if(localStorage.getItem('recentLocations') != null) {
+        this.recents = JSON.parse(localStorage.getItem('recentLocations'));
+      }
     },
     methods: {
       getUserLocation() {
@@ -136,6 +136,32 @@ var app = new Vue({
           this.userLocation.timezone = data.results[0].timezone;
           this.userLocation.set = true;
           localStorage.setItem('userLocation', JSON.stringify(this.userLocation));
+
+          if(localStorage.getItem('recentLocations') != null) {
+            var r = JSON.parse(localStorage.getItem('recentLocations'));
+
+            for(var i=0;i<r.length;i++) {
+              if(r[i].zip == this.userLocation.zip) {
+                return;
+              }
+            }
+
+            r.push({
+              city: this.userLocation.city,
+              state: this.userLocation.state,
+              zip: this.userLocation.zip
+            });
+                
+          } else {
+            var r = [{
+              city: this.userLocation.city,
+              state: this.userLocation.state,
+              zip: this.userLocation.zip
+            }];
+          }
+
+          localStorage.setItem('recentLocations',JSON.stringify(r));
+          this.recents = r;
 
         });
 
